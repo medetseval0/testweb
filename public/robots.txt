@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://your-domain.pages.dev/sitemap.xml
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block access to admin areas (if needed)
+# Disallow: /admin/
+# Disallow: /kso/admin/
+
+# Allow all gaming marketplace content
+Allow: /kso/site/

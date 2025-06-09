@@ -1,0 +1,11 @@
+# Cloudflare Pages SPA Routing Configuration
+# This ensures all routes are handled by the React Router
+
+# Handle all routes that don't match static files
+/*    /index.html   200
+
+# Optional: Redirect HTTP to HTTPS (if needed)
+# http://your-domain.com/*  https://your-domain.com/:splat  301!
+
+# Optional: Redirect www to non-www (or vice versa)
+# https://www.your-domain.com/*  https://your-domain.com/:splat  301!

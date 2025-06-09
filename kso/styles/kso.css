@@ -1,0 +1,308 @@
+/* KSO Project Specific Styles */
+/* Font is already imported in globals.css - no need to duplicate */
+
+/* KSO Root Variables */
+.kso-app {
+  /* KSO specific variables */
+  --kso-primary: #ffac3f;
+  --kso-background: #181A1C;
+  --kso-text: #ffffff;
+  --kso-text-dark: #000000;
+  --kso-border: rgba(255, 255, 255, 0.1);
+  --kso-font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* Font setup */
+  font-family: var(--kso-font-family);
+  color: var(--kso-text);
+  background-color: var(--kso-background);
+  
+  /* Ensure proper mobile app feel */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Typography - KSO specific */
+.kso-app h1,
+.kso-app h2,
+.kso-app h3,
+.kso-app h4,
+.kso-app h5,
+.kso-app h6 {
+  font-family: var(--kso-font-family);
+  font-weight: 800; /* extrabold */
+  color: var(--kso-text-dark);
+}
+
+.kso-app p,
+.kso-app span,
+.kso-app div {
+  font-family: var(--kso-font-family);
+}
+
+/* KSO Header specific styles */
+.kso-header {
+  /* Header height calculations for responsive */
+  --header-height: 118px; /* py-4 (16px) * 2 + h-14 (56px) + gap-3 (12px) + nav-height (34px) */
+  transition: all 0.3s ease;
+  /* Remove shadow completely */
+  box-shadow: none;
+}
+
+/* Responsive header height adjustments */
+@media (max-width: 1024px) {
+  .kso-header {
+    --header-height: 72px; /* Reduced height without nav menu */
+  }
+}
+
+/* Smooth transitions for native app feel */
+.kso-app section {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* Active state improvements */
+.kso-app section:active {
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure proper stacking */
+.kso-app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fixed header should be above content but below Eloxu HeadFix */
+.kso-header {
+  z-index: 40; /* Below HeadFix (50) but above content */
+}
+
+/* Remove any default margins/padding that might interfere */
+.kso-app * {
+  box-sizing: border-box;
+}
+
+/* Ensure proper font rendering */
+.kso-app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure content flows properly under fixed header */
+.kso-app main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Interactive elements hover states */
+.kso-header [class*="bg-[#ffac3f]"]:hover {
+  background-color: #e6980f !important;
+}
+
+.kso-header [class*="bg-[rgba(255,255,255,0.1)]"]:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Ensure proper touch targets for mobile */
+@media (max-width: 768px) {
+  .kso-header .cursor-pointer {
+    min-height: 44px; /* iOS touch target minimum */
+    min-width: 44px;
+  }
+}
+
+/* Focus states for accessibility */
+.kso-header .cursor-pointer:focus {
+  outline: 2px solid #ffac3f;
+  outline-offset: 2px;
+}
+
+/* Animation for header mount */
+.kso-header {
+  animation: header-slide-down 0.3s ease-out;
+}
+
+@keyframes header-slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Menu Animations */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Responsive Breakpoints */
+/* Mobile First Approach */
+
+/* Extra Small (xs): 0px - 479px */
+@media (max-width: 479px) {
+  .kso-header {
+    --header-height: 64px; /* Compact mobile header */
+  }
+}
+
+/* Small (sm): 480px - 767px */
+@media (min-width: 480px) and (max-width: 767px) {
+  .kso-header {
+    --header-height: 72px;
+  }
+}
+
+/* Medium (md): 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .kso-header {
+    --header-height: 72px;
+  }
+}
+
+/* Large (lg): 1024px - 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .kso-header {
+    --header-height: 118px; /* Full header with navigation */
+  }
+}
+
+/* Extra Large (xl): 1440px+ */
+@media (min-width: 1440px) {
+  .kso-header {
+    --header-height: 118px; /* Full header with navigation */
+  }
+}
+
+/* Input Focus Styles for Search */
+.kso-header input:focus {
+  outline: none;
+  color: #ffffff;
+}
+
+.kso-header input:focus::placeholder {
+  opacity: 0.7;
+}
+
+/* Mobile menu z-index to be above header */
+.mobile-menu {
+  z-index: 60;
+}
+
+/* Backdrop blur support check */
+@supports (backdrop-filter: blur(32px)) {
+  .kso-header {
+    backdrop-filter: blur(32px);
+  }
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(32px)) {
+  .kso-header {
+    background: rgba(25, 27, 28, 0.95) !important;
+  }
+}
+
+/* Hamburger menu button animation */
+.hamburger-btn {
+  transition: all 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-btn:active {
+  transform: scale(0.95);
+}
+
+/* Side panel slide animation */
+.side-panel-enter {
+  transform: translateX(100%);
+}
+
+.side-panel-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.side-panel-exit {
+  transform: translateX(0);
+}
+
+.side-panel-exit-active {
+  transform: translateX(100%);
+  transition: transform 300ms ease-in-out;
+}
+
+/* Prevent body scroll when mobile menu is open */
+.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* Search input responsive sizing */
+@media (max-width: 479px) {
+  .kso-header input {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 480px) {
+  .kso-header input {
+    font-size: 16px;
+  }
+}
+
+/* Logo responsive sizing */
+@media (max-width: 479px) {
+  .kso-header .h-\[34px\] {
+    height: 28px;
+  }
+  
+  .kso-header .w-\[104px\] {
+    width: 80px;
+  }
+}
+
+/* Improved mobile navigation spacing */
+@media (max-width: 1023px) {
+  .kso-header .gap-4 {
+    gap: 8px;
+  }
+  
+  .kso-header .px-4 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 767px) {
+  .kso-header button {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
