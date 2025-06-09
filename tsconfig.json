@@ -23,7 +23,7 @@
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./src/*"],
       "@/components/*": ["./components/*"],
       "@/lib/*": ["./lib/*"],
       "@/styles/*": ["./styles/*"],
@@ -39,12 +39,12 @@
     "kso/**/*.ts",
     "kso/**/*.tsx",
     "imports/**/*.ts",
-    "imports/**/*.tsx"
+    "imports/**/*.tsx",
+    "vite.config.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "build",
-    "vite.config.ts"
+    "build"
   ]
 }

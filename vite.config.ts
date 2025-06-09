@@ -17,6 +17,13 @@ export default defineConfig({
     
     // Optimize chunk splitting for better caching
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      },
+      output: {
+input: {
+        main: path.resolve(__dirname, 'index.html')
+      },
       output: {
         manualChunks: {
           // Vendor chunk for React libraries
@@ -38,7 +45,8 @@ export default defineConfig({
             '@radix-ui/react-popover',
             '@radix-ui/react-select',
             '@radix-ui/react-tabs',
-            '@radix-ui/react-tooltip'
+            '@radix-ui/react-tooltip',
+            '@radix-ui/react-slot'
           ],
           
           // Charts and utilities
@@ -55,11 +63,7 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    strictPort: false,
-    fs: {
-      // Allow serving files from project root
-      allow: ['..']
-    }
+    strictPort: false
   },
   
   // Preview server configuration
@@ -87,7 +91,8 @@ export default defineConfig({
       'react',
       'react-dom',
       'react-router-dom',
-      'lucide-react'
+      'lucide-react',
+      '@radix-ui/react-slot'
     ]
   },
   
