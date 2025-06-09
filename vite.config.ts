@@ -102,7 +102,10 @@ export default defineConfig({
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-popover',
       '@radix-ui/react-tabs',
-      '@radix-ui/react-tooltip'
+      '@radix-ui/react-tooltip',
+      'class-variance-authority',
+      'clsx',
+      'tailwind-merge'
     ]
   },
   
