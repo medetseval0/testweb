@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import svgPaths from "../../../imports/svg-oxxlfg7jy2";
 import themeContainerSvg from "../../../imports/svg-17ahhy6d65";
-import imgRectangle1 from "figma:asset/a8d10ad7a6829b4994d24c2b739281d7fd47b8bd.png";
+import { ImageWithFallback } from '../../../components/figma/ImageWithFallback';
 
 // Base Components for consistent styling
 function BorderedContainer({ 
@@ -333,10 +333,17 @@ function BalanceContainer() {
 
 function UserAvatar() {
   return (
-    <div
-      className="[background-size:174.47%_174.47%] bg-[51.04%_9.14%] bg-no-repeat relative rounded-lg shrink-0 size-[34px] cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95"
-      style={{ backgroundImage: `url('${imgRectangle1}')` }}
-    >
+    <div className="relative rounded-lg shrink-0 size-[34px] cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95">
+      <ImageWithFallback
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+        alt="User Avatar"
+        className="w-full h-full object-cover rounded-lg"
+        style={{
+          backgroundSize: '174.47% 174.47%',
+          backgroundPosition: '51.04% 9.14%',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
       <div className="absolute border border-[#ffffff] border-solid inset-0 pointer-events-none rounded-lg" />
     </div>
   );
