@@ -4,37 +4,44 @@
 
 ## 🚀 Quick Deploy to Cloudflare Pages
 
-### Option 1: Git Integration (Recommended)
-1. Push this project to GitHub/GitLab
-2. Connect your repository to Cloudflare Pages
-3. Use these build settings:
+### Method 1: Git Integration (Recommended)
+1. Push this project to GitHub
+2. Go to Cloudflare Pages dashboard
+3. Click "Create a project" → "Connect to Git"
+4. Select your repository
+5. Use these build settings:
+   - **Framework preset:** `None` (or `Vite`)
    - **Build command:** `npm run build`
    - **Build output directory:** `dist`
    - **Root directory:** `/` (leave empty)
-   - **Node.js version:** `20.x` (REQUIRED)
+   - **Node.js version:** `20.x`
 
-### Option 2: Direct Upload
-1. Run `npm install && npm run build` locally (requires Node.js 20+)
-2. Upload the `dist` folder to Cloudflare Pages
-
-### Option 3: Wrangler CLI
+### Method 2: Direct Upload
 ```bash
+# Build locally (requires Node.js 20+)
 npm install
-npm run deploy
+npm run build
+
+# Upload the 'dist' folder to Cloudflare Pages
 ```
 
-## ⚠️ Important Requirements
+## ⚠️ Important Build Settings
+
+### Cloudflare Pages Configuration
+In your Cloudflare Pages project settings:
+
+**Build Settings:**
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Root directory: (leave empty)
+
+**Environment Variables:**
+- `NODE_VERSION` = `20`
+- `NPM_FLAGS` = `--production=false`
 
 ### Node.js Version
 - **Required:** Node.js 20.x or higher
-- **Cloudflare Pages Environment Variable:** `NODE_VERSION = 20.18.0`
-- **Local Development:** Use `.nvmrc` file (Node 20.18.0)
-
-### Dependencies
-- React Router v6.28.0 (compatible with Node.js 18+)
-- TypeScript 5.7.2
-- Vite 6.0.1
-- Tailwind CSS v4
+- **Local Development:** Use `.nvmrc` file (`nvm use`)
 
 ## 🏗️ Project Structure
 
@@ -53,6 +60,7 @@ npm run deploy
 │   └── 📁 styles/       # KSO-specific styles
 ├── 📁 imports/          # Figma imported assets
 ├── 📁 styles/           # Global styles
+├── 📁 functions/        # Cloudflare Pages functions
 └── 📁 public/           # Static assets
 ```
 
@@ -61,8 +69,8 @@ npm run deploy
 ### Core Platform
 - ✅ **Multi-project architecture** - Portfolio, Admin, KSO
 - ✅ **React 18** with TypeScript
-- ✅ **React Router** v6 for routing (Node.js 18+ compatible)
-- ✅ **Tailwind CSS** v4 for styling
+- ✅ **React Router v6** for routing
+- ✅ **Tailwind CSS v4** for styling
 - ✅ **Responsive design** - Mobile-first approach
 
 ### KSO Gaming Marketplace
@@ -83,12 +91,12 @@ npm run deploy
 
 ### Prerequisites
 - **Node.js 20.x** (use .nvmrc: `nvm use`)
-- npm or yarn
+- npm
 
 ### Local Development
 ```bash
 # Use correct Node.js version
-nvm use  # or nvm install 20.18.0
+nvm use  # Uses Node.js 20.18.0
 
 # Install dependencies
 npm install
@@ -122,32 +130,42 @@ npm run preview
   └── /auth/*       → Authentication
 ```
 
-## 🔧 Cloudflare Pages Configuration
+## 🐛 Troubleshooting
 
-### Environment Variables
-Set these in Cloudflare Pages dashboard:
-```env
-NODE_VERSION=20.18.0
-NPM_FLAGS=--verbose
-NODE_ENV=production
+### Common Build Issues
+
+**1. "Unsupported engine" Error**
+```bash
+# Solution: Use Node.js 20+
+nvm install 20
+nvm use 20
 ```
 
-### Build Settings
-```yaml
-Build command: npm run build
-Build output directory: dist
-Root directory: (empty)
-Node.js version: 20.x
+**2. "Cannot resolve module" Errors**
+```bash
+# Solution: Clear cache and reinstall
+rm -rf node_modules package-lock.json
+npm install
 ```
 
-## 🚀 Performance
+**3. Build Fails on Cloudflare Pages**
+- ✅ Check Node.js version is set to 20.x
+- ✅ Ensure build command is `npm run build`
+- ✅ Verify build output directory is `dist`
+- ✅ Make sure root directory is empty (not `/`)
 
-### Optimizations
-- **Code splitting** - Vendor, router, UI chunks
-- **Tree shaking** - Remove unused code
-- **Image optimization** - WebP support
-- **Font optimization** - Preload critical fonts
-- **Bundle analysis** - Track chunk sizes
+**4. 404 Errors on Page Refresh**
+- ✅ Ensure `_redirects` file exists in `public/` folder
+- ✅ Content should be: `/*    /index.html   200`
+
+### Build Configuration Checklist
+- [ ] Repository connected to Cloudflare Pages
+- [ ] Build command: `npm run build` 
+- [ ] Build output: `dist`
+- [ ] Node.js version: `20.x`
+- [ ] Environment variables: `NODE_VERSION=20`
+
+## 📊 Performance
 
 ### Lighthouse Scores
 - **Performance:** 95+
@@ -155,30 +173,11 @@ Node.js version: 20.x
 - **Best Practices:** 100
 - **SEO:** 100
 
-## 🐛 Troubleshooting
-
-### Build Issues
-
-**"Unsupported engine" Error**
-- Ensure Node.js 20+ is used in Cloudflare Pages
-- Set `NODE_VERSION=20.18.0` environment variable
-
-**TypeScript Errors**
-- Run `npm run type-check` locally first
-- Ensure all imports use correct paths
-
-**404 on Refresh**
-- Ensure `_redirects` file is in `public/` folder
-- Check Cloudflare Pages routing settings
-
-**Build Fails**
-- Check Node.js version (20.x required)
-- Clear `node_modules` and reinstall: `rm -rf node_modules package-lock.json && npm install`
-
-### Support
-- Create an issue on GitHub
-- Check Cloudflare Pages documentation
-- Review build logs in Cloudflare dashboard
+### Optimizations
+- **Code splitting** - Vendor, router, UI chunks
+- **Tree shaking** - Remove unused code
+- **Asset optimization** - Images, fonts, SVGs
+- **Caching** - Static assets with long TTL
 
 ## 📄 License
 
@@ -186,6 +185,6 @@ MIT License - see LICENSE file for details.
 
 ---
 
-**Built with ❤️ for Cloudflare Pages**
+**Built for Cloudflare Pages** 🚀
 
-**Important:** Use Node.js 20+ for builds! 🚀
+**No wrangler.toml needed** - Simple build configuration works best!

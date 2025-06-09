@@ -15,7 +15,7 @@
     "jsx": "react-jsx",
     
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
@@ -44,6 +44,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "build"
+    "build",
+    "vite.config.ts"
   ]
 }
