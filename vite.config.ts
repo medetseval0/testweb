@@ -28,7 +28,7 @@ export default defineConfig({
           // Router chunk
           router: ['react-router-dom'],
           
-          // UI libraries chunk - all Radix UI components
+          // Radix UI components chunk
           radix: [
             '@radix-ui/react-accordion',
             '@radix-ui/react-alert-dialog',
@@ -52,7 +52,7 @@ export default defineConfig({
             'class-variance-authority'
           ],
           
-          // Charts and other libs
+          // Charts and other libraries
           charts: ['recharts', 'date-fns']
         }
       }
@@ -88,7 +88,7 @@ export default defineConfig({
     }
   },
   
-  // Optimize dependencies - include all Radix UI packages
+  // Optimize dependencies - include all critical Radix UI packages
   optimizeDeps: {
     include: [
       'react',
@@ -101,6 +101,7 @@ export default defineConfig({
       '@radix-ui/react-dialog',
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-popover',
+      '@radix-ui/react-tabs',
       '@radix-ui/react-tooltip'
     ]
   },
