@@ -11,10 +11,10 @@
    - **Build command:** `npm run build`
    - **Build output directory:** `dist`
    - **Root directory:** `/` (leave empty)
-   - **Node.js version:** `18.x` or `20.x`
+   - **Node.js version:** `20.x` (REQUIRED)
 
 ### Option 2: Direct Upload
-1. Run `npm run build` locally
+1. Run `npm install && npm run build` locally (requires Node.js 20+)
 2. Upload the `dist` folder to Cloudflare Pages
 
 ### Option 3: Wrangler CLI
@@ -23,20 +23,37 @@ npm install
 npm run deploy
 ```
 
+## ⚠️ Important Requirements
+
+### Node.js Version
+- **Required:** Node.js 20.x or higher
+- **Cloudflare Pages Environment Variable:** `NODE_VERSION = 20.18.0`
+- **Local Development:** Use `.nvmrc` file (Node 20.18.0)
+
+### Dependencies
+- React Router v6.28.0 (compatible with Node.js 18+)
+- TypeScript 5.7.2
+- Vite 6.0.1
+- Tailwind CSS v4
+
 ## 🏗️ Project Structure
 
 ```
-├── 📁 components/          # Shared components
-│   ├── 📁 ui/             # Shadcn/ui components
-│   ├── 📁 pages/          # Legacy page components
-│   └── 📁 figma/          # Figma imported components
-├── 📁 kso/                # KSO Gaming Marketplace
-│   ├── 📁 components/     # KSO-specific components
-│   ├── 📁 pages/          # KSO pages
-│   └── 📁 styles/         # KSO-specific styles
-├── 📁 imports/            # Figma imported assets
-├── 📁 styles/             # Global styles
-└── 📁 public/             # Static assets
+├── 📁 src/                # Main application entry
+│   ├── App.tsx           # Main app component
+│   ├── main.tsx          # React entry point
+│   └── Loading.tsx       # Loading component
+├── 📁 components/        # Shared components
+│   ├── 📁 ui/           # Shadcn/ui components
+│   ├── 📁 pages/        # Legacy page components
+│   └── 📁 figma/        # Figma imported components
+├── 📁 kso/              # KSO Gaming Marketplace
+│   ├── 📁 components/   # KSO-specific components
+│   ├── 📁 pages/        # KSO pages
+│   └── 📁 styles/       # KSO-specific styles
+├── 📁 imports/          # Figma imported assets
+├── 📁 styles/           # Global styles
+└── 📁 public/           # Static assets
 ```
 
 ## 🎯 Features
@@ -44,7 +61,7 @@ npm run deploy
 ### Core Platform
 - ✅ **Multi-project architecture** - Portfolio, Admin, KSO
 - ✅ **React 18** with TypeScript
-- ✅ **React Router** v7 for routing
+- ✅ **React Router** v6 for routing (Node.js 18+ compatible)
 - ✅ **Tailwind CSS** v4 for styling
 - ✅ **Responsive design** - Mobile-first approach
 
@@ -65,11 +82,14 @@ npm run deploy
 ## 🛠️ Development
 
 ### Prerequisites
-- Node.js 18.x or 20.x
+- **Node.js 20.x** (use .nvmrc: `nvm use`)
 - npm or yarn
 
 ### Local Development
 ```bash
+# Use correct Node.js version
+nvm use  # or nvm install 20.18.0
+
 # Install dependencies
 npm install
 
@@ -81,9 +101,6 @@ npm run dev
 
 ### Build for Production
 ```bash
-# Type check
-npm run type-check
-
 # Build for production
 npm run build
 
@@ -105,47 +122,22 @@ npm run preview
   └── /auth/*       → Authentication
 ```
 
-## 🎨 Theming
-
-### Light Theme (Portfolio/Admin)
-- Background: `#ffffff`
-- Text: `#0a0a0a`
-- Primary: `#0f172a`
-
-### Dark Theme (KSO)
-- Background: `#181A1C`
-- Text: `#ffffff`
-- Primary: `#ffac3f`
-
-## 📱 Responsive Design
-
-### Breakpoints
-- **Mobile:** `< 768px`
-- **Tablet:** `768px - 1024px`
-- **Desktop:** `> 1024px`
-
-### Header Heights
-- **Desktop:** `118px` (full navigation)
-- **Mobile/Tablet:** `72px` (compact)
-
-## 🔧 Configuration
+## 🔧 Cloudflare Pages Configuration
 
 ### Environment Variables
-Create `.env.local` for local development:
+Set these in Cloudflare Pages dashboard:
 ```env
-VITE_API_URL=https://api.example.com
-VITE_CLOUDFLARE_ANALYTICS_TOKEN=your_token_here
+NODE_VERSION=20.18.0
+NPM_FLAGS=--verbose
+NODE_ENV=production
 ```
 
-### Cloudflare Pages Settings
+### Build Settings
 ```yaml
 Build command: npm run build
 Build output directory: dist
 Root directory: (empty)
-Node.js version: 18.x
-Environment variables:
-  NODE_VERSION: 18.17.0
-  NPM_FLAGS: --verbose
+Node.js version: 20.x
 ```
 
 ## 🚀 Performance
@@ -163,37 +155,25 @@ Environment variables:
 - **Best Practices:** 100
 - **SEO:** 100
 
-## 🔒 Security
-
-- ✅ **Content Security Policy** ready
-- ✅ **HTTPS only** in production
-- ✅ **XSS protection** built-in
-- ✅ **Dependency scanning** with npm audit
-
-## 📊 Analytics
-
-### Cloudflare Web Analytics
-Add your token to environment variables:
-```env
-VITE_CLOUDFLARE_ANALYTICS_TOKEN=your_token
-```
-
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Build Issues
+
+**"Unsupported engine" Error**
+- Ensure Node.js 20+ is used in Cloudflare Pages
+- Set `NODE_VERSION=20.18.0` environment variable
+
+**TypeScript Errors**
+- Run `npm run type-check` locally first
+- Ensure all imports use correct paths
 
 **404 on Refresh**
 - Ensure `_redirects` file is in `public/` folder
 - Check Cloudflare Pages routing settings
 
 **Build Fails**
-- Check Node.js version (18.x recommended)
-- Clear `node_modules` and reinstall
-- Run `npm run type-check` for TypeScript errors
-
-**Styles Not Loading**
-- Check Tailwind CSS configuration
-- Verify font imports in `globals.css`
+- Check Node.js version (20.x required)
+- Clear `node_modules` and reinstall: `rm -rf node_modules package-lock.json && npm install`
 
 ### Support
 - Create an issue on GitHub
@@ -208,4 +188,4 @@ MIT License - see LICENSE file for details.
 
 **Built with ❤️ for Cloudflare Pages**
 
-Ready to deploy? Just push to GitHub and connect to Cloudflare Pages! 🚀
+**Important:** Use Node.js 20+ for builds! 🚀

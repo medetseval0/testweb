@@ -32,12 +32,18 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx", 
+    "kso/**/*.ts",
+    "kso/**/*.tsx",
+    "imports/**/*.ts",
+    "imports/**/*.tsx"
   ],
-  "references": [
-    { "path": "./tsconfig.node.json" }
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
   ]
 }

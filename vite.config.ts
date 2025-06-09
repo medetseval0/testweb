@@ -5,7 +5,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   
-  // Base URL for deployment (adjust if deploying to subdirectory)
+  // Base URL for deployment
   base: '/',
   
   // Build configuration optimized for Cloudflare Pages
@@ -94,6 +94,6 @@ export default defineConfig({
   // Environment variables
   define: {
     // Ensure process.env is available for some libraries
-    'process.env': {}
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
   }
 })
