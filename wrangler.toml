@@ -1,0 +1,13 @@
+name = "eloxu-platform"
+compatibility_date = "2024-06-09"
+
+[build]
+command = "npm run build"
+cwd = "/"
+
+[build.environment_variables]
+NODE_VERSION = "20.18.0"
+NPM_FLAGS = "--verbose"
+
+[[pages_build_output_dir]]
+value = "dist"
