@@ -4,6 +4,7 @@
   "description": "Eloxu Multi-Project Platform with KSO Gaming Marketplace - Production ready for Cloudflare Pages",
   "private": true,
   "type": "module",
+  "main": "src/main.tsx",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
