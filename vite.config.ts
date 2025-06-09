@@ -21,10 +21,6 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html')
       },
       output: {
-input: {
-        main: path.resolve(__dirname, 'index.html')
-      },
-      output: {
         manualChunks: {
           // Vendor chunk for React libraries
           vendor: ['react', 'react-dom'],
@@ -32,9 +28,8 @@ input: {
           // Router chunk
           router: ['react-router-dom'],
           
-          // UI libraries chunk
-          ui: [
-            'lucide-react',
+          // UI libraries chunk - all Radix UI components
+          radix: [
             '@radix-ui/react-accordion',
             '@radix-ui/react-alert-dialog',
             '@radix-ui/react-avatar',
@@ -49,8 +44,16 @@ input: {
             '@radix-ui/react-slot'
           ],
           
-          // Charts and utilities
-          utils: ['recharts', 'clsx', 'tailwind-merge', 'class-variance-authority']
+          // Icons and utilities
+          utils: [
+            'lucide-react',
+            'clsx', 
+            'tailwind-merge', 
+            'class-variance-authority'
+          ],
+          
+          // Charts and other libs
+          charts: ['recharts', 'date-fns']
         }
       }
     },
@@ -85,14 +88,20 @@ input: {
     }
   },
   
-  // Optimize dependencies
+  // Optimize dependencies - include all Radix UI packages
   optimizeDeps: {
     include: [
       'react',
       'react-dom',
       'react-router-dom',
       'lucide-react',
-      '@radix-ui/react-slot'
+      '@radix-ui/react-slot',
+      '@radix-ui/react-direction',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-popover',
+      '@radix-ui/react-tooltip'
     ]
   },
   
